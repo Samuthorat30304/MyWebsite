@@ -35,7 +35,7 @@ ${message}`;
                     template_id: process.env.MSG91_TEMPLATE_ID,
                     recipients: [
                         {
-                            mobiles: "91YOUR_MOBILE_NUMBER",
+                            mobiles: "917507863572",
                             VAR1: name,
                             VAR2: mobile,
                             VAR3: message
