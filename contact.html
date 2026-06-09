@@ -157,68 +157,50 @@
 
     <!-- JAVASCRIPT -->
 
-    <script>
+   <script>
+async function showMessage(event) {
+    event.preventDefault();
 
-async function showMessage(event){
+    const form = event.target;
 
-event.preventDefault();
+    const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        mobile: form.mobile.value,
+        message: form.message.value
+    };
 
-const form = event.target;
+    try {
 
-const formData = {
+        const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
 
-name: form.name.value,
-email: form.email.value,
-mobile: form.mobile.value,
-message: form.message.value
+        const data = await response.json();
 
-};
+        if (data.success) {
+            alert("Message sent successfully!");
+            form.reset();
+        } else {
+            alert(data.message || "Failed to send message");
+        }
 
-try {
-
-const response = await fetch("http://localhost:5000/contact", {
-
-method: "POST",
-
-headers: {
-"Content-Type": "application/json"
-},
-
-body: JSON.stringify(formData)
-
-});
-
-const data = await response.json();
-
-if(data.success){
-
-alert("Message Submitted Successfully");
-
-form.reset();
-
-}else{
-
-alert("Failed To Send Message");
-
+    } catch (error) {
+        console.error(error);
+        alert("Server Error");
+    }
 }
 
-} catch(error){
-
-alert("Server Error");
-
+function topFunction() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
-
-}
-
-function topFunction(){
-
-window.scrollTo({
-top:0,
-behavior:'smooth'
-});
-
-}
-
 </script>
 </body>
 
